@@ -78,7 +78,7 @@ export default function Calculator() {
 
   return (
     <>
-      <div className="w-full bg-black h-full flex flex-col justify-center items-center ">
+      <div className="w-full bg-black h-screen flex flex-col justify-center items-center ">
         <div className="bg-white text-black w-full h-full rounded-xl flex flex-col justify-center items-center">
           <input
             type="text"
