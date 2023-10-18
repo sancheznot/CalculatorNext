@@ -8,7 +8,7 @@ export const PopUp = ({ setDisplay }) => {
 
   useEffect(() => {
     const historial = JSON.parse(localStorage?.getItem("history"));
-    historial.reverse();
+    historial?.reverse();
     setHistoryList(historial);
   }, [historyList]);
 
