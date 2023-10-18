@@ -48,7 +48,7 @@ export const PopUp = ({ setDisplay }) => {
           <div className="w-full bg-slate-300 h-[2px] flex justify-center items-center"></div>
           <div className="w-full">
             <div className="w-full  overflow-scroll">
-              {historyList.map((item, index) => (
+              {historyList?.map((item, index) => (
                 <div
                   key={index}
                   className="w-full flex flex-row justify-between items-center border-b border-slate-300 p-2 ">
