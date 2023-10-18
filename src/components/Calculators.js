@@ -84,7 +84,7 @@ export default function Calculator() {
             type="text"
             disabled
             value={display}
-            className="w-full h-52 rounded-t-xl text-2xl p-5 bg-gray-300"
+            className="w-full h-44 rounded-t-xl text-2xl p-5 bg-gray-300"
           />
           <div className="w-full grid gap-1 p-2 grid-cols-1 h-full rounded-b-xl bg-slate-700 place-content-center">
             <div className=" h-10 flex flex-row justify-between gap-20 w-full my-2 ">
