@@ -108,7 +108,7 @@ export default function Calculator() {
                 </svg>
               </button>
             </div>
-            <div className="grid h-full grid-cols-4 p-5 place-items-center gap-10">
+            <div className="grid h-full grid-cols-4  place-items-center gap-10">
               {buttonValues.map((value) => (
                 <button
                   className={value !== "C" ? regularCharacter : cancelCharacter}
