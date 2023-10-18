@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { PopUp } from "./PopUp";
 
 export default function Calculator() {
   const [display, setDisplay] = useState("");
@@ -12,9 +13,24 @@ export default function Calculator() {
   const handleButtonClick = (value) => {
     const values = ["()", "+/-"];
 
+    const checkHistory = JSON.parse(localStorage.getItem("history"));
+    const history = checkHistory === null ? [] : checkHistory;
+
     if (value === "=") {
       try {
         setDisplay(eval(display).toString());
+       if (history.length > 0) {
+          const history = JSON.parse(localStorage.getItem("history"));
+          const newHistory = [
+            ...history,
+            { display: display + " = " + eval(display).toString() },
+          ];
+          localStorage.setItem("history", JSON.stringify(newHistory));
+        }else{
+          const newHistory = [{ display: display + " = " + eval(display).toString() }];
+          localStorage.setItem("history", JSON.stringify(newHistory));
+        }
+
       } catch (error) {
         setDisplay("Error");
       }
@@ -28,6 +44,9 @@ export default function Calculator() {
     } else {
       setDisplay(display + value);
     }
+    if (display === "0") {
+      setDisplay(value);
+    }
   };
 
   const buttonValues = [
@@ -38,7 +57,7 @@ export default function Calculator() {
     "7",
     "8",
     "9",
-    "X",
+    "*",
     "4",
     "5",
     "6",
@@ -68,7 +87,9 @@ export default function Calculator() {
             className="w-full h-52 rounded-t-xl text-2xl p-5 bg-gray-300"
           />
           <div className="w-full grid gap-1 p-2 grid-cols-1 h-full rounded-b-xl bg-slate-700 place-content-center">
-            <div className="grid h-8  place-items-end my-2 mr-2">
+            <div className=" h-10 flex flex-row justify-between gap-20 w-full my-2 ">
+              <PopUp  setDisplay={setDisplay}/>
+
               <button
                 className="rounded-full w-14 h-14 bg-orange-600 flex justify-center items-center"
                 onClick={deleteone}>
