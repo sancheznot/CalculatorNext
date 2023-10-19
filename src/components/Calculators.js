@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { PopUp } from "./PopUp";
 
 export default function Calculator() {
+ 
   const [display, setDisplay] = useState("");
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [windowSizeHeight, setWindowSizeHeight] = useState("");
@@ -15,6 +16,7 @@ export default function Calculator() {
 
     window.addEventListener("resize", handleResize);
     handleResize();
+    console.log(window)
 
     setWindowSizeHeight(windowSize.height + "px");
 
@@ -97,16 +99,16 @@ export default function Calculator() {
 
   return (
     <>
-      <div className={`h-[${windowSizeHeight}]  `}>
-        {/* // {`w-full bg-black h-[${windowSizeHeight}] flex flex-col justify-center items-center `}> */}
+      <div
+        className={`w-full bg-black h-full flex flex-col justify-center items-center `}>
         <div className="bg-white h-full text-black w-full rounded-xl flex flex-col justify-center items-center">
           <input
             type="text"
             disabled
             value={display}
-            className="w-full h-32 rounded-t-xl text-2xl p-5 bg-gray-300"
+            className="w-full h-32 rounded-t-xl text-2xl bg-gray-300"
           />
-          <div className="w-full grid gap-1 p-2 grid-cols-1 rounded-b-xl bg-slate-700 place-content-center">
+          <div className="w-full h-full grid gap-1 p-2 grid-cols-1 rounded-b-xl bg-slate-700 place-content-center">
             <div className=" h-10 flex flex-row justify-between gap-20 w-full my-2 ">
               <PopUp setDisplay={setDisplay} />
 
