@@ -1,9 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PopUp } from "./PopUp";
 
 export default function Calculator() {
   const [display, setDisplay] = useState("");
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+  // fix the pixel of the screen
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    console.log(windowSize)
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [windowSize]);
 
   const deleteone = () => {
     const displayDeleted = display.slice(0, -1);
@@ -19,18 +35,19 @@ export default function Calculator() {
     if (value === "=") {
       try {
         setDisplay(eval(display).toString());
-       if (history.length > 0) {
+        if (history.length > 0) {
           const history = JSON.parse(localStorage.getItem("history"));
           const newHistory = [
             ...history,
             { display: display + " = " + eval(display).toString() },
           ];
           localStorage.setItem("history", JSON.stringify(newHistory));
-        }else{
-          const newHistory = [{ display: display + " = " + eval(display).toString() }];
+        } else {
+          const newHistory = [
+            { display: display + " = " + eval(display).toString() },
+          ];
           localStorage.setItem("history", JSON.stringify(newHistory));
         }
-
       } catch (error) {
         setDisplay("Error");
       }
@@ -78,7 +95,7 @@ export default function Calculator() {
 
   return (
     <>
-      <div className="w-full bg-black h-screen flex flex-col justify-center items-center ">
+      <div className={`w-full bg-black h-[${windowSize.height}] flex flex-col justify-center items-center `}>
         <div className="bg-white text-black w-full h-full rounded-xl flex flex-col justify-center items-center">
           <input
             type="text"
@@ -88,7 +105,7 @@ export default function Calculator() {
           />
           <div className="w-full grid gap-1 p-2 grid-cols-1 h-full rounded-b-xl bg-slate-700 place-content-center">
             <div className=" h-10 flex flex-row justify-between gap-20 w-full my-2 ">
-              <PopUp  setDisplay={setDisplay}/>
+              <PopUp setDisplay={setDisplay} />
 
               <button
                 className="rounded-full w-14 h-14 bg-orange-600 flex justify-center items-center"
