@@ -5,21 +5,23 @@ import { PopUp } from "./PopUp";
 export default function Calculator() {
   const [display, setDisplay] = useState("");
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [windowSizeHeight, setWindowSizeHeight] = useState("");
 
   // fix the pixel of the screen
-
   useEffect(() => {
     const handleResize = () => {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+      setWindowSize({ width: window.innerWidth, height: window.outerHeight });
     };
 
     window.addEventListener("resize", handleResize);
     handleResize();
-    console.log(windowSize)
+
+    setWindowSizeHeight(windowSize.height + "px");
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [windowSize]);
+  }, [windowSize.height]);
 
   const deleteone = () => {
     const displayDeleted = display.slice(0, -1);
@@ -95,15 +97,16 @@ export default function Calculator() {
 
   return (
     <>
-      <div className={`w-full bg-black h-[${windowSize.height}] flex flex-col justify-center items-center `}>
-        <div className="bg-white text-black w-full h-full rounded-xl flex flex-col justify-center items-center">
+      <div
+        className={`w-full bg-black h-[698px] flex flex-col justify-center items-center `}>
+        <div className="bg-white text-black w-full rounded-xl flex flex-col justify-center items-center">
           <input
             type="text"
             disabled
             value={display}
             className="w-full h-32 rounded-t-xl text-2xl p-5 bg-gray-300"
           />
-          <div className="w-full grid gap-1 p-2 grid-cols-1 h-full rounded-b-xl bg-slate-700 place-content-center">
+          <div className="w-full grid gap-1 p-2 grid-cols-1 rounded-b-xl bg-slate-700 place-content-center">
             <div className=" h-10 flex flex-row justify-between gap-20 w-full my-2 ">
               <PopUp setDisplay={setDisplay} />
 
@@ -125,7 +128,7 @@ export default function Calculator() {
                 </svg>
               </button>
             </div>
-            <div className="grid h-full grid-cols-4 p-5 place-items-center gap-10">
+            <div className="grid grid-cols-4 p-5 place-items-center gap-10">
               {buttonValues.map((value) => (
                 <button
                   className={value !== "C" ? regularCharacter : cancelCharacter}
