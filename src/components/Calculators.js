@@ -97,9 +97,9 @@ export default function Calculator() {
 
   return (
     <>
-      <div
-        className={`w-full bg-black h-[698px] flex flex-col justify-center items-center `}>
-        <div className="bg-white text-black w-full rounded-xl flex flex-col justify-center items-center">
+      <div className={`h-[${windowSizeHeight}]  `}>
+        {/* // {`w-full bg-black h-[${windowSizeHeight}] flex flex-col justify-center items-center `}> */}
+        <div className="bg-white h-full text-black w-full rounded-xl flex flex-col justify-center items-center">
           <input
             type="text"
             disabled
