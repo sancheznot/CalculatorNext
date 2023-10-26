@@ -50,7 +50,7 @@ export const HowInstall = () => {
                 </li>
                 <li className=" mr-2">Click on the setting.</li>
                 <li className=" mr-2">
-                  Scroll down and tap Add to Home screen.
+                  Scroll down and tap Install App
                 </li>
                 <li className=" mr-2">Confirm by tapping Add.</li>
               </ol>
