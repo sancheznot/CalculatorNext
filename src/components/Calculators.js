@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { PopUp } from "./PopUp";
+import { Info } from "./Info";
+import { HowInstall } from "./HowInstall";
 
 export default function Calculator() {
- 
   const [display, setDisplay] = useState("");
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [windowSizeHeight, setWindowSizeHeight] = useState("");
@@ -16,7 +17,7 @@ export default function Calculator() {
 
     window.addEventListener("resize", handleResize);
     handleResize();
-    console.log(window)
+    console.log(window);
 
     setWindowSizeHeight(windowSize.height + "px");
 
@@ -106,10 +107,10 @@ export default function Calculator() {
             type="text"
             disabled
             value={display}
-            className="w-full h-32 rounded-t-xl text-2xl bg-gray-300"
+            className="w-full h-32 rounded-t-xl text-2xl bg-gray-300 "
           />
           <div className="w-full h-full grid gap-1 p-2 grid-cols-1 rounded-b-xl bg-slate-700 place-content-center">
-            <div className=" h-10 flex flex-row justify-between gap-20 w-full my-2 ">
+            <div className=" h-10 flex flex-row justify-between gap-20 w-full ">
               <PopUp setDisplay={setDisplay} />
 
               <button
@@ -130,7 +131,7 @@ export default function Calculator() {
                 </svg>
               </button>
             </div>
-            <div className="grid grid-cols-4 p-5 place-items-center gap-10">
+            <div className="grid grid-cols-4 p-6 place-items-center gap-10">
               {buttonValues.map((value) => (
                 <button
                   className={value !== "C" ? regularCharacter : cancelCharacter}
@@ -139,6 +140,10 @@ export default function Calculator() {
                   {value}
                 </button>
               ))}
+            </div>
+            <div className="  flex flex-row justify-between  w-full">
+              <Info />
+              <HowInstall />
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ export const PopUp = ({ setDisplay }) => {
   }, [historyList]);
 
   const setOldData = (e) => {
-    const data = e.target.value.replace(/[ = ]/g, "");
+    const data = e.target.value.replace(/\s*=\s*\d+/g, '');
     setDisplay(data);
   };
   return (
